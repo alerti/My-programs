@@ -1,0 +1,235 @@
+#import socket
+from Tkinter import *
+import ttk
+import sqlite3
+
+
+ar=''
+def aldy():
+   pn=c1.get()
+   id=c3.get()
+   pot=cb.get()
+   ed=c7.get()
+   ar=[pn,id,pot,ed]
+   print ar[1]
+   
+   
+def kuja(var):
+   mn=Menu(var)
+   mht=Menu(mn,tearoff=1)
+   mn.add_cascade(label='Welcome',menu=mht)
+   mht.add_command(label='Add New Product',command=newFarmer)
+   mht.add_separator()
+   mht.add_command(label='Product Catalogue',command=removeFarmer)
+   mht.add_separator()
+   mht.add_command(label='Sales Reports')
+   mht.add_separator()
+   mht.add_command(label='Inventories')
+   mht.add_separator()
+   mht.add_command(label='Notifications')
+   var.configure(bg='#323232',menu=mn,cursor='arrow')
+   
+
+
+   
+def addcategory():
+   pl=Toplevel(a)
+   pl.resizable(0,0)
+   b4=Frame(pl, bg='#f3f1f2',width='200',pady='10',padx='50',bd='5',relief='flat')
+   b4.grid(row='12', column='5',columnspan='5')
+   g1=Label(b4,text='Create / Add Product ',font=('Tahoma',12),bg='#f3f1f2',fg='black')
+   g1.pack(side=TOP)
+   g5=Label(b4,text='Enter Product Category Name:')
+   g6=Button(b4,text='+ Add',bg='darkblue',fg='white',padx='10')
+   g5.pack()
+   g2=Text(b4,bd='2',height='2',width='24')
+   g2.pack()
+   g6.pack()
+
+
+
+   
+   
+
+def newFarmer():
+   tp1=Toplevel(a)
+   
+   mn12=Menu(tp1)
+   sb1=Menu(mn12)
+   mn12.add_cascade(label='+Category',menu=sb1)
+   sb1.add_command(label='Add Category',command=addcategory)
+   tp1.config(menu=mn12)
+   tp1.resizable(0,0)
+   lb3=Label(tp1,text='+ Add Comodity',bg='black',fg='lightgreen',font=('Georgia',20),bd='3')
+   lb3.pack(fill=X)
+   b2=Frame(tp1,  bg='black',width='200',pady='10',padx='50')
+   c=Label(b2,text='Name', bg='black',fg='white')
+   c.grid(row='3',column='1')
+   c1=Entry(b2, bg='white',fg='red',width='20')
+   c1.grid(row='3',column='3')
+   c2=Label(b2,text='Serial', bg='black',fg='white')
+   c2.grid(row='4',column='1')
+   c3=Entry(b2, bg='white',fg='red',width='20')
+   c3.grid(row='4',column='3')
+   cb=ttk.Combobox(b2,width='20')
+   cb['values']=['good','good','good','good','good','good']
+   cb.grid(row='6',column='3')
+   c5=Label(b2,text='Category', bg='black',fg='white')
+   c5.grid(row='6',column='1')
+   c6=Label(b2,text='Amount', bg='black',fg='white')
+   c6.grid(row='9',column='1')
+   c7=Entry(b2, bg='white',fg='red',width='20',highlightthickness=0)
+   c7.grid(row='9',column='3')
+   b1=Button(b2,text='Add To System',command=aldy,width='20',bg='lightgreen',borderwidth=0)
+   b1.grid(row='13',column='3')
+   b2.grid(row='3',column='5',columnspan='5')
+   b1.grid(row='18',column='3')
+   b2.pack(fill=X)
+
+
+def removeFarmer():
+   tp12=Toplevel(a)
+   tp12.geometry('600x700')
+   kuja(tp12)
+   #tp12.resizable(0,0)
+   ann=Frame(tp12)
+   srch=Text(ann,height='1',width='3')
+   lb32=Label(tp12,text="Catalogue",bg='black',fg='lightgreen',font=('Tahoma',20),bd='0')
+   lb32.pack(fill=X)
+   ann.pack(fill=X)
+   b3=Frame(tp12, bg='grey',width='200',pady='1',padx='5',height='600')
+   lb24=Label(b3,text='Names'+'----'+'ID No'+'--'+'Join Date'+'---'+'Availed'+'---'+'Bought',bg='lightblue',padx='0')
+   lb24.pack(fill=X)
+   ad2=Scrollbar(b3)
+   ad2.pack(side=RIGHT,fill=X)
+   asx2=Listbox(b3,height='300',width='196',yscrollcommand=ad2.set)
+   ad2.configure(command=asx2.yview)
+   for i in range(10):
+      asx2.insert(END,str(i)+'.)'+' '+'Name'+'            '+'Id No'+'            '+'Date'+'            '+'200'+'            '+'100')
+      asx2.pack(fill=X)
+   b3.pack(fill=X)
+   pane=Frame(tp12,height='130',bg='black')
+   pane.pack(side=BOTTOM)
+
+
+
+a=Tk()
+a.geometry('1230x890')
+a.minsize(1220,890)
+#inv=PhotoImage(file='icons/details.gif')
+#set=PhotoImage(file='icons/settings.gif')
+#home=PhotoImage(file='icons/home.gif')
+#info=PhotoImage(file='icons/info.gif')
+#save=PhotoImage(file='icons/save.gif')
+#keys=PhotoImage(file='icons/keys.gif')
+#search=PhotoImage(file='icons/search.gif')
+
+#a.resizable(0,0)
+a.title('Alerti system 1.0 ')
+kuja(a)
+
+topmost=Label(a,text='POS awesome system',pady='5',padx='2',font=('Tahoma',19),bg='black',fg='white',cursor='spider')
+topmost.pack(fill=X)
+rt=Frame(a,bg='#f9f9f9',padx='64',pady='10')
+rt.pack(fill=X)
+fr1=Frame(a,padx='5',pady='4',height='200',bg='white')
+
+#begin sidebar menu
+sub1=Frame(fr1,width='377.89880',height='700',bg='grey',padx='4',pady='3')
+fr4=Label(sub1,text='Shortcuts',bg='darkgreen',fg='white',pady='5',bd='0')
+fr4.pack(fill=X)
+fr5=Frame(sub1,height=30,bg='#323232',pady=5,cursor='spider')
+fr5.pack(fill=X)
+lba=Label(fr5,text='Payment By:',fg='#f3f3f3',bg='#323232')
+lba.pack(side=LEFT)
+cb2=ttk.Combobox(fr5,)
+cb2['values']=['visa','mobile','cash']
+cb2.pack(side=LEFT)
+
+en2=Entry(fr5)
+en2.pack(side=LEFT)
+sub1.pack(side=LEFT)
+sub1.pack_propagate(False)
+
+#end first side bar menu
+
+
+en=Button(rt,text='Search',height=1,bg='orange',fg='white',relief='flat')
+en.pack(side=RIGHT)
+tx=Entry(rt,bd=5)
+tx.pack(side=RIGHT)
+cbx=ttk.Combobox(rt)
+cbx.config(height='17')
+cbx['values']=['Receipt','product name','seller','transaction id']
+cbx.pack(side=RIGHT)
+r2=Button(rt,text='INVENTORY',padx='7',pady='9',cursor='target',width='20',relief='flat',bg='khaki')
+r2.pack(side=LEFT)
+r21=Button(rt,text='CATALOGUE',padx='7',pady='9',command=removeFarmer,bg='skyblue',width='20',relief='flat')
+r21.pack(side=LEFT)
+
+r3=Button(rt,text='REPORTS',padx='7',pady='9',bg='darkblue',fg='white',width='20',relief='flat')
+r3.pack(side=LEFT)
+r31=Button(rt,text='RECEIPTS',padx='7',pady='9',width='20',relief='flat',bg='cyan')
+r31.pack(side=LEFT)
+
+r4=Button(rt,text='NOTIFICATIONS',padx='7',pady='9',bg='lightgreen',width='20',relief='flat')
+r4.pack(side=LEFT)
+r5=Button(rt,text='BACK-UP',padx='7',pady='9',width='20',relief='flat')
+r5.pack(side=LEFT)
+r55=Button(rt,text='BUY PRO VERSION',padx='7',pady='9',bg='red',fg='white',width='20',relief='flat')
+r55.pack(side=LEFT)
+r56=Button(rt,text='WEB',padx='7',pady='9',bg='lightgreen',width='20',relief='flat')
+r56.pack(side=LEFT)
+r1=Button(rt,text='EXIT',padx='7',pady='9',bg='tomato',fg='white',cursor='pirate',command=a.destroy,width='20',relief='flat')
+r1.pack(side=LEFT)
+#end top menu
+
+sub2=Frame(fr1)
+lpv=Label(sub2,text='Product'+'                          '+'Quantity'+'                                       '+'Price',bg='black',fg='green',padx='3',pady='4')
+lpv.pack(side=TOP,fill=X)
+by=Listbox(sub2)
+
+for i in range(10):
+   by.insert(END,'     '+'Product'+'                                  '+'Quantity'+'                            '+'Price')
+by.pack(fill=X)
+by.totals=Label(sub2,text='Totals:'+'                                             ')
+totals.pack(fill=X)
+
+df=Frame(sub2,height='40',pady=7,padx=19,bg='black')
+txb=Label(df,text='Cash given',bg='black',fg='maroon',font=('helvetica',17))
+txb.pack(side=LEFT)
+txl=Entry(df,width='40')
+txl.pack(side=RIGHT)
+df.pack(fill=X)
+
+
+df2=Frame(sub2,height='40',pady=7,padx=19,bg='black')
+txb2=Label(df2,text='TOTAL CHANGE',bg='black',fg='lightgreen',font=('helvetica',19))
+txb2.pack(side=LEFT)
+txl2=Entry(df2,text='00.00')
+txl2.pack(side=RIGHT)
+df2.pack(fill=X)
+longOkbtn=Button(sub2,text='PRINT AS RECEIPT',bg='darkblue',fg='white',relief='flat')
+longOkbtn.pack(fill=X)
+
+longcnc=Button(sub2,text='CANCEL',bg='tomato',fg='white',relief='flat')
+longcnc.pack(fill=X)
+
+
+
+sub2.config(width=399,height=600,bg='#f3f1ff',padx='4',pady='3')
+sub2.pack(side=LEFT)
+sub2.pack_propagate(False)
+
+fr1.pack(fill=X)
+
+bottomost=Label(a,text='mukunzi alex:, tel: +254718264080,email:mukunzialex47@gmail.com',bg='#dedede',fg='green',font=('Georgia',12),cursor='spraycan')
+bottomost.pack(fill=X)
+
+
+
+a.mainloop()
+
+
+
+
