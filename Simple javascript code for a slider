@@ -1,0 +1,150 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <meta charset="utf-8" />
+    <title>My Slider</title>  
+    <style type="text/css">  
+        body {  
+            margin: 0;  
+            background: #e6e6e6;  
+        }  
+        .showSlide {  
+            display: none; 
+        }  
+            .showSlide img {  
+                width: 100%;
+                height:200px;
+                border-radius:10px;  
+            }  
+        .slidercontainer {  
+            max-width: 100%;  
+            position: relative;  
+            margin: auto;  
+        }  
+        .left, .right {  
+            cursor: pointer;  
+            position: absolute;  
+            top: 50%;  
+            width: auto;  
+            padding: 16px;  
+            margin-top: -22px;  
+            color: green;  
+            font-weight: bold;  
+            font-size: 60px;  
+            transition: 2s ease;  
+            border-radius: 0 3px 3px 0;
+            z-index:16px;  
+        }  
+        .right {  
+            right: 0;  
+            border-radius: 10px 0 0 15px;  
+        }  
+            .left:hover, .right:hover {  
+                background-color: rgba(115, 115, 115, 0);
+                color:white;  
+            }  
+        .content {  
+            color: #eff5d4;  
+            font-size: 30px;  
+            padding: 8px 12px;  
+            position: absolute;  
+            top: 10px;  
+            width: 100%;  
+            text-align: center;  
+        } 
+
+        .active {  
+            background-color: #717171;  
+        }  
+        /* Fading animation */  
+        .fade {  
+            -webkit-animation-name: fade;  
+            -webkit-animation-duration: 1.5s;  
+            animation-name: fade;  
+            animation-duration: 1.5s;  
+        }  
+        @-webkit-keyframes fade {  
+            from {  
+                opacity: .2  
+            }  
+            to {  
+                opacity: 1  
+            }  
+        }  
+  
+        @keyframes fade {  
+            from {  
+                opacity: .4  
+            }  
+            to {  
+                opacity: 1  
+            }  
+        }  
+    </style>  
+</head>  
+<body>  
+    <div class="slidercontainer" >  
+        <div class="showSlide fade">  <!--you can put an html code here to give you a slider as an html graphical  code-->
+            <img src="your image link here" />  
+            <div class="content">We bring Tchnology closer to you</div>  
+        </div>  
+        <div class="showSlide fade">  
+            <img src="your image here" /> <!---you can put an html code here to give you a slider as an html graphical  code-->
+            <div class="content">We are focused to your success</div>  
+        </div>  
+  
+        <div class="showSlide fade">  
+            <img src="your image here" /> <!---you can put an html code here to give you a slider as an html graphical  code--> 
+            <div class="content">Let us Grow with you</div>  
+        </div>  
+        <div class="showSlide fade">  
+            <img src="your image here" />  <!---you can put an html code here to give you a slider as an html graphical  code-->
+            <div class="content">Solutions are here</div>  
+        </div>  
+        <!-- Navigation arrows -->  
+        <i class="left" onclick="nextSlide(-1)">&#10094</i>  
+        <i class="right" onclick="nextSlide(1)">&#10095</i>  
+    </div>  
+  
+    <script type="text/javascript">  
+        var slide_index = 1;  
+        displaySlides(slide_index);  
+  
+        function nextSlide(n) {  
+            displaySlides(slide_index += n);  
+        }  
+  
+        function currentSlide(n) {  
+            displaySlides(slide_index = n);  
+        }  
+  
+        function displaySlides(n) {  
+            var i;  
+            var slides = document.getElementsByClassName("showSlide");  
+            if (n > slides.length) { slide_index = 1 }  
+            if (n < 1) { slide_index = slides.length }  
+            for (i = 0; i < slides.length; i++) {  
+                slides[i].style.display = "none";  
+            }  
+            slides[slide_index - 1].style.display = "block"; 
+            setTimeout(displaySlides, 2000);
+        }
+        var slide_index = 0;
+        displaySlides();
+
+    function displaySlides() {
+    var i;
+    var x = document.getElementsByClassName("showSlide");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none"; 
+    }
+    slide_index++;
+    if (slide_index > x.length) {slide_index = 1} 
+    x[slide_index-1].style.display = "block"; 
+    setTimeout(displaySlides, 8000); // Change image every 2 seconds
+}
+
+    </script>  
+  
+</body>  
+</html>   
